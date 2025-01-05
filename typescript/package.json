@@ -1,0 +1,24 @@
+{
+  "name": "typescript-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "NODE_ENV=development ts-node src/index.ts",
+    "build": "tsc --incremental",
+    "watch": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write .",
+    "check-format": "prettier --check ."
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-import": "^2.31.0",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^5.7.2"
+  }
+}

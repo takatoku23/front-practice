@@ -10,7 +10,7 @@ services:
     volumes:
       - ./typescript:/app
     working_dir: /app
-    command: ["pnpm", "start"]
+    command: ["pnpm", "watch"]
 
   react:
     build:
@@ -32,4 +32,4 @@ services:
     volumes:
       - ./todo-app:/app
     working_dir: /app
-    command: ["pnpm", "start"]
+    command: ["pnpm", "dev"]

@@ -14,4 +14,4 @@ RUN pnpm install
 COPY . .
 
 # デフォルトコマンド
-CMD ["pnpm", "start"]
+CMD ["pnpm", "dev"]

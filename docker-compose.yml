@@ -17,10 +17,12 @@ services:
       context: ./react
       dockerfile: Dockerfile
     ports:
-      - "3002:3000"
+      - "3002:3002"
     volumes:
       - ./react:/app
     working_dir: /app
+    stdin_open: true
+    tty: true
     command: ["pnpm", "dev"]
 
   todo-app:
@@ -28,8 +30,10 @@ services:
       context: ./todo-app
       dockerfile: Dockerfile
     ports:
-      - "3003:3000"
+      - "3003:3003"
     volumes:
       - ./todo-app:/app
     working_dir: /app
+    stdin_open: true
+    tty: true
     command: ["pnpm", "dev"]

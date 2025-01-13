@@ -12,6 +12,3 @@ RUN pnpm install
 
 # ソースコードをコピー
 COPY . .
-
-# デフォルトコマンド
-CMD ["pnpm", "dev"]

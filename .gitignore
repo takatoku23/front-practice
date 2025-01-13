@@ -9,3 +9,5 @@ dist/
 
 # System files
 .DS_Store
+
+.pnpm-store/

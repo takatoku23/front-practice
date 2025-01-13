@@ -6,6 +6,14 @@ TYPESCRIPT = typescript
 REACT = react
 TODO_APP = todo-app
 
+# コンテナ名のプレフィックス
+DOCKER_CONTAINER_PREFIX = front-practice-
+
+# コンテナ名
+TYPESCRIPT_CONTAINER = $(DOCKER_CONTAINER_PREFIX)$(TYPESCRIPT)-1
+REACT_CONTAINER = $(DOCKER_CONTAINER_PREFIX)$(REACT)-1
+TODO_APP_CONTAINER = $(DOCKER_CONTAINER_PREFIX)$(TODO_APP)-1
+
 # 全サービスの起動
 up:
 	$(DC) up -d
@@ -23,51 +31,71 @@ build-no-cache:
 	$(DC) build --no-cache
 
 # 特定のサービスをビルド
+build-typescript:
+	$(DC) build $(TYPESCRIPT)
+
 build-react:
 	$(DC) build $(REACT)
 
 build-todo:
 	$(DC) build $(TODO_APP)
 
-build-typescript:
-	$(DC) build $(TYPESCRIPT)
-
-# React コンテナに入る
-react:
-	$(DC) exec $(REACT) sh
-
-# Todo App コンテナに入る
-todo:
-	$(DC) exec $(TODO_APP) sh
-
-# TypeScript コンテナに入る
+# 特定のサービスに入る
 typescript:
-	$(DC) exec $(TYPESCRIPT) sh
+	docker exec -it $(TYPESCRIPT_CONTAINER) sh
 
-# React の ESLint 実行
-lint-react:
-	$(DC) exec $(REACT) pnpm lint
+react:
+	docker exec -it $(REACT_CONTAINER) sh
 
-# Todo App のフォーマット実行
-format-todo:
-	$(DC) exec $(TODO_APP) pnpm format
+todo:
+	docker exec -it $(TODO_APP_CONTAINER) sh
 
-# TypeScript の型チェック実行
-type-check:
-	$(DC) exec $(TYPESCRIPT) pnpm type-check
+# 依存関係のインストール
+install-typescript:
+	$(DC) run --rm $(TYPESCRIPT) pnpm install
 
-# 全サービスのログ表示
+install-react:
+	$(DC) run --rm $(REACT) pnpm install
+
+install-todo:
+	$(DC) run --rm $(TODO_APP) pnpm install
+
+install-all:
+	$(MAKE) install-typescript
+	$(MAKE) install-react
+	$(MAKE) install-todo
+
+# ログの確認
 logs:
 	$(DC) logs
 
-# React サービスのログ表示
+logs-typescript:
+	$(DC) logs $(TYPESCRIPT)
+
 logs-react:
 	$(DC) logs $(REACT)
 
-# Todo App サービスのログ表示
 logs-todo:
 	$(DC) logs $(TODO_APP)
 
-# TypeScript サービスのログ表示
-logs-typescript:
-	$(DC) logs $(TYPESCRIPT)
+# 再起動
+restart:
+	$(MAKE) down
+	$(MAKE) up
+
+# 特定サービスの再起動
+restart-typescript:
+	$(DC) stop $(TYPESCRIPT)
+	$(DC) up -d $(TYPESCRIPT)
+
+restart-react:
+	$(DC) stop $(REACT)
+	$(DC) up -d $(REACT)
+
+restart-todo:
+	$(DC) stop $(TODO_APP)
+	$(DC) up -d $(TODO_APP)
+
+# 不要なコンテナの削除
+prune:
+	docker container prune -f

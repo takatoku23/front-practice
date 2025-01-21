@@ -41,13 +41,13 @@ build-todo:
 	$(DC) build $(TODO_APP)
 
 # 特定のサービスに入る
-typescript:
+sh-typescript:
 	docker exec -it $(TYPESCRIPT_CONTAINER) sh
 
-react:
+sh-react:
 	docker exec -it $(REACT_CONTAINER) sh
 
-todo:
+sh-todo:
 	docker exec -it $(TODO_APP_CONTAINER) sh
 
 # 依存関係のインストール

@@ -21,15 +21,13 @@
     "baseUrl": "./", // ベースパス
     "paths": {
       // エイリアスを設定
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
 
     /* TypeScriptサポート */
     "lib": ["ES2022", "DOM"], // 使用するランタイム環境
     "jsx": "react-jsx", // React用のJSXサポートを有効化
-    "allowSyntheticDefaultImports": true, // デフォルトインポートを許可
-    "experimentalDecorators": true, // デコレーターを有効化
-    "emitDecoratorMetadata": true // デコレーターのメタデータを出力
+    "allowSyntheticDefaultImports": true // デフォルトインポートを許可
   },
   "include": ["src/**/*"], // コンパイル対象に全てのファイルを含む（.ts, .tsx）
   "exclude": ["node_modules", "dist"] // 除外対象

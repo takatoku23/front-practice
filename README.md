@@ -11,8 +11,8 @@
 ### 1. リポジトリのクローン
 
 ```bash
-git clone {}
-cd front-practice
+git clone https://github.com/iacc/front-practice-typescript-react.git
+cd front-practice-typescript-react
 ```
 
 ---
@@ -49,62 +49,8 @@ make install-all
 
 ---
 
-### 5. サービスの再起動
+### 5. reactの開発環境URL
 
-以下のコマンドで全てのサービスをバックグラウンドで起動します。
+以下のurlにアクセスし、reactの環境が立ち上がっているかを確認
 
-```bash
-make restart
-```
-
-**特定のサービスを起動する場合**:
-
-```bash
-docker compose up typescript
-docker compose up react
-docker compose up todo-app
-```
-
----
-
-### 5. サービスへの接続
-
-特定のサービスのコンテナに接続するには、以下を使用します。
-
-- **TypeScript サービス**:
-
-  ```bash
-  make typescript
-  ```
-
-- **React サービス**:
-
-  ```bash
-  make react
-  ```
-
-- **Todo アプリ サービス**:
-
-  ```bash
-  make todo
-  ```
-
----
-
-### 6. ログの確認
-
-全サービスのログを確認するには、以下を使用します。
-
-```bash
-make logs
-```
-
-特定のサービスのログを確認する場合:
-
-```bash
-make logs-typescript
-make logs-react
-make logs-todo
-```
-
----
+`http://localhost:3002/`

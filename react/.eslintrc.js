@@ -40,6 +40,11 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
+    settings: {
+      'import/resolver': {
+        typescript: {}, // TypeScriptのエイリアス解決を有効化
+      },
+    },
     'no-console': 'warn', // console.logの使用を警告
   },
 };

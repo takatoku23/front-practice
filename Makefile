@@ -4,7 +4,6 @@ DC = docker compose
 # サービス名
 TYPESCRIPT = typescript
 REACT = react
-TODO_APP = todo-app
 
 # コンテナ名のプレフィックス
 DOCKER_CONTAINER_PREFIX = front-practice-
@@ -12,7 +11,6 @@ DOCKER_CONTAINER_PREFIX = front-practice-
 # コンテナ名
 TYPESCRIPT_CONTAINER = $(DOCKER_CONTAINER_PREFIX)$(TYPESCRIPT)-1
 REACT_CONTAINER = $(DOCKER_CONTAINER_PREFIX)$(REACT)-1
-TODO_APP_CONTAINER = $(DOCKER_CONTAINER_PREFIX)$(TODO_APP)-1
 
 # 全サービスの起動
 up:
@@ -37,22 +35,12 @@ build-typescript:
 build-react:
 	$(DC) build $(REACT)
 
-build-todo:
-	$(DC) build $(TODO_APP)
-
 # 特定のサービスに入る
 sh-typescript:
 	docker exec -it $(TYPESCRIPT_CONTAINER) sh
 
 sh-react:
 	docker exec -it $(REACT_CONTAINER) sh
-
-sh-todo:
-	docker exec -it $(TODO_APP_CONTAINER) sh
-
-# サービス立ち上げ（コンテナ内でyarn start実行）
-up-react:
-	$(DC) run --rm $(REACT) pnpm start
 
 # 依存関係のインストール
 install-typescript:
@@ -61,44 +49,17 @@ install-typescript:
 install-react:
 	$(DC) run --rm $(REACT) pnpm install
 
-install-todo:
-	$(DC) run --rm $(TODO_APP) pnpm install
-
 install-all:
 	$(MAKE) install-typescript
 	$(MAKE) install-react
-	$(MAKE) install-todo
 
-# ログの確認
-logs:
-	$(DC) logs
+# reactサービス立ち上げ（コンテナ内でyarn start実行）
+up-react:
+	$(DC) run --rm $(REACT) pnpm start
 
-logs-typescript:
-	$(DC) logs $(TYPESCRIPT)
-
-logs-react:
-	$(DC) logs $(REACT)
-
-logs-todo:
-	$(DC) logs $(TODO_APP)
-
-# 再起動
-restart:
-	$(MAKE) down
-	$(MAKE) up
-
-# 特定サービスの再起動
-restart-typescript:
-	$(DC) stop $(TYPESCRIPT)
-	$(DC) up -d $(TYPESCRIPT)
-
-restart-react:
-	$(DC) stop $(REACT)
-	$(DC) up -d $(REACT)
-
-restart-todo:
-	$(DC) stop $(TODO_APP)
-	$(DC) up -d $(TODO_APP)
+# typescriptサービス立ち上げ（コンテナ内でyarn start実行）
+up-typescript:
+	$(DC) run --rm $(TYPESCRIPT) pnpm build
 
 # 不要なコンテナの削除
 prune:

@@ -50,6 +50,10 @@ sh-react:
 sh-todo:
 	docker exec -it $(TODO_APP_CONTAINER) sh
 
+# サービス立ち上げ（コンテナ内でyarn start実行）
+up-react:
+	$(DC) run --rm $(REACT) pnpm start
+
 # 依存関係のインストール
 install-typescript:
 	$(DC) run --rm $(TYPESCRIPT) pnpm install

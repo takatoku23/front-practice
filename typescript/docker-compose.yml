@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  typescript:
+    build:
+      context: ./typescript
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./typescript:/app
+    working_dir: /app
+    command: ["pnpm", "watch"]
+
+  react:
+    build:
+      context: ./react
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./react:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    command: ["pnpm", "dev"]
+
+  todo-app:
+    build:
+      context: ./todo-app
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./todo-app:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    command: ["pnpm", "dev"]

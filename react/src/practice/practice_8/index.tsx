@@ -14,7 +14,6 @@
 // 画面のリサイズを検知するには、resizeイベントを使用します。
 // イベントリスナーの解除は、window.removeEventListenerを使用します。
 
-
 export const Practice8 = () => {
   return <>{/* コードをここに書いてください */}</>;
 };

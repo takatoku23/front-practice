@@ -1,15 +1,4 @@
-// Button component
-const DetailButton = ({
-  product,
-}: {
-  product: { name: string; price: number };
-}) => {
-  const handleClick = () => {
-    alert(`${product.name}: ${product.price}`);
-  };
-
-  return <button onClick={handleClick}>詳細を見る</button>;
-};
+import { Button } from '@/answer/practice_5/button';
 
 // Main component
 export const Answer5 = () => {
@@ -24,7 +13,7 @@ export const Answer5 = () => {
       {products.map((product) => (
         <div key={product.id}>
           <span>{product.name}</span>
-          <DetailButton product={product} />
+          <Button product={product} />
         </div>
       ))}
     </>

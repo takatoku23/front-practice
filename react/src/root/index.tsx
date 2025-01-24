@@ -1,3 +1,4 @@
+import { Answer9 } from '@/answer/practice_9';
 import { Practice1 } from '@/practice/practice_1';
 import { Practice2 } from '@/practice/practice_2';
 import { Practice3 } from '@/practice/practice_3';
@@ -12,6 +13,7 @@ export const Root = () => {
       <Practice3 />
       <Practice4 />
       <Practice5 />
+      <Answer9 />
     </>
   );
 };

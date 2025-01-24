@@ -5,6 +5,7 @@ const button = document.querySelector('button');
 const input = document.querySelector('input');
 
 // ボタンがクリックされたら、入力フィールドの値の長さをコンソールに表示します。
+// エラーを解消してください。
 
 // 以下のコメントを外して問題を解く
 // button.onclick = () => {

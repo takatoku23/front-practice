@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { DeliveryForm } from '@/answer/practice_9/DeliveryForm';
+import { FormField } from '@/answer/practice_9/FormField';
+import { SelectField } from '@/answer/practice_9/SelectField';
+import React, { useEffect, useState } from 'react';
 
 export const Answer9 = () => {
   const [formData, setFormData] = useState({
@@ -21,12 +24,12 @@ export const Answer9 = () => {
   useEffect(() => {
     const updatedOptions = deliveryOptions.map((option) => ({
       ...option,
-      disabled: option.value === '店舗受け取り' && formData.quantity > 10, // 数量が10を超えた場合は無効化
+      disabled: option.value === '店舗受け取り' && formData.quantity > 10,
     }));
 
     setDeliveryOptions(updatedOptions);
 
-    // 「店舗受け取り」が選択されている場合は「通常配送」に切り替える
+    // 「店舗受け取り」が選択されている場合、自動的に「通常配送」に切り替え
     if (formData.quantity > 10 && formData.deliveryMethod === '店舗受け取り') {
       setFormData((prev) => ({
         ...prev,
@@ -41,7 +44,7 @@ export const Answer9 = () => {
     const { name, value, type } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'number' ? Math.max(1, Number(value)) : value, // 数量は1以上
+      [name]: type === 'number' ? Math.max(1, Number(value)) : value,
     }));
   };
 
@@ -52,76 +55,34 @@ export const Answer9 = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>商品名:</label>
-        <input
-          type="text"
-          name="productName"
-          value={formData.productName}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>数量:</label>
-        <input
-          type="number"
-          name="quantity"
-          value={formData.quantity}
-          onChange={handleChange}
-          min="1" // 最小値1
-        />
-      </div>
-      <div>
-        <label>配送方法:</label>
-        <select
-          name="deliveryMethod"
-          value={formData.deliveryMethod}
-          onChange={handleChange}
-        >
-          {deliveryOptions.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              disabled={option.disabled}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      {formData.deliveryMethod !== '店舗受け取り' && (
-        <div>
-          <label>配送先住所:</label>
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </div>
-      )}
-      {formData.deliveryMethod === 'お急ぎ配送' && (
-        <div>
-          <label>配送希望日:</label>
-          <input
-            type="datetime-local"
-            name="deliveryDate"
-            value={formData.deliveryDate}
-            onChange={handleChange}
-          />
-        </div>
-      )}
-      {formData.deliveryMethod === '店舗受け取り' && (
-        <div>
-          <label>店舗名:</label>
-          <input
-            type="text"
-            name="storeName"
-            value={formData.storeName}
-            onChange={handleChange}
-          />
-        </div>
-      )}
+      <FormField
+        label="商品名"
+        name="productName"
+        type="text"
+        value={formData.productName}
+        onChange={handleChange}
+      />
+      <FormField
+        label="数量"
+        name="quantity"
+        type="number"
+        value={formData.quantity}
+        onChange={handleChange}
+      />
+      <SelectField
+        label="配送方法"
+        name="deliveryMethod"
+        value={formData.deliveryMethod}
+        options={deliveryOptions}
+        onChange={handleChange}
+      />
+      <DeliveryForm
+        deliveryMethod={formData.deliveryMethod}
+        address={formData.address}
+        deliveryDate={formData.deliveryDate}
+        storeName={formData.storeName}
+        onChange={handleChange}
+      />
       <button type="submit">送信</button>
     </form>
   );

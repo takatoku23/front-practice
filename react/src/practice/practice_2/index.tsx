@@ -3,5 +3,5 @@
 
 export const Practice2 = () => {
   const name = 'Hello, React!';
-  return <h1></h1>;
+  return <h1>{name}</h1>;
 };

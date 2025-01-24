@@ -18,7 +18,13 @@ export const Practice5 = () => {
   ];
 
   return (
-    <>
-    </>
+    <ul>
+      {/* {products.map((product) => (
+        <li>
+          product.name
+          <button>詳細を見る</button>
+        </li>
+      ))} */}
+    </ul>
   );
 };

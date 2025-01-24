@@ -3,5 +3,7 @@
 
 export const Practice3 = () => {
   let isLoggedIn: boolean;
-  return <></>;
+  isLoggedIn = true;
+  isLoggedIn = false;
+  return <>{isLoggedIn ? 'Welcome back!' : 'Please sign in.'}</>;
 };

@@ -12,6 +12,21 @@
 // type Foo = () => number;
 // type Bar = () => string;
 
+type MyReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any
+) => infer R
+  ? R
+  : never;
+
+type Foo1<T> = () => T;
+const foo1: Foo1<number> = () => 1;
+
+type LastArgType<T> = T extends (
+  ...args: [...infer Rest, infer Last]
+) => infer Last
+  ? Last
+  : never;
+
 // 問題2: オブジェクトの特定のキーを省略する型
 // オブジェクト T からキー K を省略する型 `OmitKey` を作成してください。
 
@@ -20,6 +35,10 @@
 // - 構文: `Exclude<keyof T, K>`
 // - 残ったキーで新しいオブジェクト型を構築します。
 
+type OmitKey<T, K extends keyof T> = {
+  [P in Exclude<keyof T, K>]: T[P];
+};
+
 // 使用例:
-// type User = { id: number; name: string; age: number };
-// type WithoutAge = OmitKey<User, "age">; // { id: number; name: string; }
+type User = { id: number; name: string; age: number };
+type WithoutAge = OmitKey<User, 'age'>; // { id: number; name: string; }
